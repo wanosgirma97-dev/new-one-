@@ -5,7 +5,8 @@ const app = express();
 // Connect to MongoDB
 mongoose
   .connect(
-    "mongodb+srv://2mahletfantahun_db_user:ALYjg9doofdjQ8KL@cluster0.fazg5lp.mongodb.net/class_project?appName=Cluster0",
+    "mongodb+srv://wanosgirma97_db_user:uPxfSXqQhYhlfTHd@cluster0.kjlnnif.mongodb.net/?appName=Cluster0",
+
   )
   .then(() => console.log("DB Connected"))
   .catch((err) => console.error("DB Connection Error:", err));
@@ -27,3 +28,4 @@ app.listen(port, () => {
 app.get("/", (req, res) => {
   res.send("Server is running on port 5000! ");
 });
+
