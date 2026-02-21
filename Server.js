@@ -1,31 +1,27 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
+require("dotenv").config();
+
 const app = express();
 
-// Connect to MongoDB
-mongoose
-  .connect(
-    "mongodb+srv://wanosgirma97_db_user:uPxfSXqQhYhlfTHd@cluster0.kjlnnif.mongodb.net/?appName=Cluster0",
-
-  )
-  .then(() => console.log("DB Connected"))
-  .catch((err) => console.error("DB Connection Error:", err));
-
-// Middleware
 app.use(express.json());
-app.use(express.json({ extended: false }));
+app.use(cors());
 
-// Routes
-app.use("/product", require("./routes/productRout"));
-app.use("/user", require("./routes/userRoute"));
-app.use("/order", require("./routes/orderRoutes"));
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => {
+    console.log("DB Connected Successfully");
+  })
+  .catch((err) => {
+    console.error("DB Connection Error:", err);
+  });
 
-// Start server
-const port = 5000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
 app.get("/", (req, res) => {
-  res.send("Server is running on port 5000! ");
+  res.send("Server is running!");
 });
 
+const PORT = 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

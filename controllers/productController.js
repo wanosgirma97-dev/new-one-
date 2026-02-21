@@ -10,6 +10,8 @@ exports.getAllProducts = async (req, res) => {
   }
 };
 
+
+
 // CREATE
 exports.addNewProducts = async (req, res) => {
   try {
@@ -57,6 +59,7 @@ exports.deleteProduct = async (req, res) => {
     if (!deleted) {
       return res.status(404).json({ msg: "Product not found" });
     }
+    
 
     // Success response
     res.status(200).json({
@@ -68,3 +71,16 @@ exports.deleteProduct = async (req, res) => {
     res.status(500).json({ msg: "Error deleting product", error: err.message });
   }
 };
+
+exports.AddProduct = async (req, res) => {
+
+try {
+      const{name , price} = req.body;
+      const product = await product.create({name,price});
+      res.send(product);
+      
+    } catch (error) {
+      res.json({msg:"Error"});
+      
+    }
+  }
