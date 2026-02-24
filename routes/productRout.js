@@ -16,4 +16,4 @@ router.patch("/editproduct/:id", editProducts);
 router.delete("/deleteproduct/:id", deleteProduct);
 router.delete("/addProduct", AddProduct)
 
-module.exports = router;
+module.exports = router

@@ -5,11 +5,20 @@ require("dotenv").config();
 
 const app = express();
 
+// Middleware
 app.use(express.json());
 app.use(cors());
 
-mongoose
-  .connect(process.env.MONGO_URL)
+// Load Routes
+app.use("/product", require("./routes/productRout"));
+
+// Test route
+app.get("/", (req, res) => {
+  res.send("Server is running!");
+});
+
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URL)
   .then(() => {
     console.log("DB Connected Successfully");
   })
@@ -17,11 +26,9 @@ mongoose
     console.error("DB Connection Error:", err);
   });
 
-app.get("/", (req, res) => {
-  res.send("Server is running!");
-});
+// Start server
+const port = process.env.PORT || 5000;
 
-const PORT = 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
